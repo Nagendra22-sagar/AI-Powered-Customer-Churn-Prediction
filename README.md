@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \# 🤖 AI-Powered Customer Churn Prediction \& Retention Intelligence System
 
 
@@ -303,4 +304,6 @@ This project is open source and available for educational and portfolio purposes
 ⭐ \*\*If you found this project helpful, please give it a star!\*\* ⭐
 
 
+=======
+>>>>>>> 1d1bd0d8df7aa20f9cc0f0cc03eddde721a993f4
 
