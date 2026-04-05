@@ -1,26 +1,26 @@
-# 🤖 AI-Powered Customer Churn Prediction & Retention Intelligence System
+#  AI-Powered Customer Churn Prediction & Retention Intelligence System
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://nagendra-churn-predictor.streamlit.app)
 
-## 📌 Project Overview
+##  Project Overview
 An end-to-end AI-powered customer churn prediction system that combines Machine Learning, Generative AI, and Business Intelligence to identify at-risk customers and provide actionable retention strategies.
 
-## 📸 Project Screenshots
+##  Project Screenshots
 
-### 🖥️ Power BI — Business Overview
+###  Power BI — Business Overview
 ![Business Overview](Dashboard%20Screenshot/dashboard_overview.png)
 
-### 📊 Power BI — Revenue Analysis
+###  Power BI — Revenue Analysis
 ![Revenue Analysis](Dashboard%20Screenshot/revenue_analysis.png)
 
-### 🔴 Power BI — Churn Analysis
+###  Power BI — Churn Analysis
 ![Churn Analysis](Dashboard%20Screenshot/Churn_Analysis.png)
 
-### 🗺️ Power BI — Product & Region
+###  Power BI — Product & Region
 ![Product Region](Dashboard%20Screenshot/Product_Region_Analysis.png)
 
 ## 🔗 Live Demo
-👉 **[Click here to view Live App](https://nagendra-churn-predictor.streamlit.app)**
+ **[Click here to view Live App](https://nagendra-churn-predictor.streamlit.app)**
 
 ## 🛠️ Tech Stack
 | Tool | Purpose |
@@ -34,25 +34,25 @@ An end-to-end AI-powered customer churn prediction system that combines Machine 
 | Streamlit | Web Application |
 | GitHub | Version Control |
 
-## 📊 Dataset
+##  Dataset
 - **594 unique customers**
 - **3,000 transactions**
 - **Full year data (Jan-Dec 2023)**
 - **Zero missing values**
 - **10 features:** Order_ID, Customer_ID, Order_Date, Product, Category, Quantity, Price, Revenue, Region, Order_Month
 
-## 🎯 Key Features
-- ✅ Customer Churn Prediction using Random Forest & Logistic Regression
-- ✅ RFM Analysis (Recency, Frequency, Monetary)
-- ✅ Feature Engineering — 7 ML features created
-- ✅ AI-powered churn explanations using Groq LLM
-- ✅ Interactive Power BI Dashboard (4 pages, 15+ visualizations)
-- ✅ SQL Analysis with 10 business queries
-- ✅ Excel Report with Pivot Tables & Charts
-- ✅ Live Streamlit Web App with AI Chatbot
-- ✅ Deployed on Streamlit Cloud
+##  Key Features
+-  Customer Churn Prediction using Random Forest & Logistic Regression
+-  RFM Analysis (Recency, Frequency, Monetary)
+-  Feature Engineering — 7 ML features created
+-  AI-powered churn explanations using Groq LLM
+-  Interactive Power BI Dashboard (4 pages, 15+ visualizations)
+-  SQL Analysis with 10 business queries
+-  Excel Report with Pivot Tables & Charts
+-  Live Streamlit Web App with AI Chatbot
+-  Deployed on Streamlit Cloud
 
-## 📁 Project Structure
+##  Project Structure
 AI-Powered-Customer-Churn-Prediction/
 ├── Data/
 │   ├── customer_cohort_dataset.csv
@@ -75,13 +75,13 @@ AI-Powered-Customer-Churn-Prediction/
 ├── requirements.txt
 └── README.md
 
-## 📈 Model Performance
+##  Model Performance
 | Model | Accuracy | AUC Score |
 |-------|----------|-----------|
 | Logistic Regression | ~82% | ~0.85 |
 | Random Forest | ~85%+ | ~0.90 |
 
-## 🔍 Key Business Insights
+##  Key Business Insights
 - **24% overall churn rate** across 594 customers
 - **Electronics** category contributes highest revenue
 - **Recency** is the most important churn predictor
@@ -89,7 +89,7 @@ AI-Powered-Customer-Churn-Prediction/
 - **East region** has highest churn rate
 - **Office** category has lowest churn rate
 
-## 📊 Project Phases
+##  Project Phases
 | Phase | Tool | Description |
 |-------|------|-------------|
 | Phase 1 | Python | Data Loading & EDA |
@@ -102,13 +102,13 @@ AI-Powered-Customer-Churn-Prediction/
 | Phase 8 | Streamlit | Web App Development |
 | Phase 9 | GitHub | Version Control & Deployment |
 
-## 🌐 Streamlit App Pages
-- **📊 Dashboard** — KPI cards, revenue trends, churn distribution
-- **🔍 Churn Predictor** — Real-time churn prediction with AI explanation
-- **🤖 AI Assistant** — Ask business questions, generate AI reports
-- **📈 Analytics** — Filter by region & category, download data
+##  Streamlit App Pages
+- ** Dashboard** — KPI cards, revenue trends, churn distribution
+- ** Churn Predictor** — Real-time churn prediction with AI explanation
+- ** AI Assistant** — Ask business questions, generate AI reports
+- ** Analytics** — Filter by region & category, download data
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 ```bash
 # Clone repository
 git clone https://github.com/Nagendra22-sagar/AI-Powered-Customer-Churn-Prediction.git
@@ -123,7 +123,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## 📦 Requirements
+##  Requirements
 pandas
 numpy
 matplotlib
@@ -132,7 +132,7 @@ scikit-learn
 streamlit
 groq
 
-## 🎓 Skills Demonstrated
+##  Skills Demonstrated
 - **Data Analysis** — EDA, data cleaning, feature engineering
 - **Machine Learning** — Classification, model evaluation, hyperparameter tuning
 - **SQL** — CTEs, window functions, aggregations, joins
@@ -141,13 +141,13 @@ groq
 - **Web Development** — Streamlit app development and deployment
 - **Version Control** — Git & GitHub
 
-## 👨‍💻 Author
+##  Author
 **Nagendra V Sagar**
-- 📧 nagendravsagar22@gmail.com
-- 💼 [LinkedIn](https://linkedin.com/in/nagendravsagar)
-- 🐙 [GitHub](https://github.com/Nagendra22-sagar)
+-  nagendravsagar22@gmail.com
+-  [LinkedIn](https://linkedin.com/in/nagendravsagar)
+-  [GitHub](https://github.com/Nagendra22-sagar)
 
-## 📄 License
+##  License
 This project is open source and available for educational and portfolio purposes.
 
 ---
