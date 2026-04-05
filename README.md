@@ -4,24 +4,19 @@
 
 ## 📌 Project Overview
 An end-to-end AI-powered customer churn prediction system that combines Machine Learning, Generative AI, and Business Intelligence to identify at-risk customers and provide actionable retention strategies.
-
 ## 📸 Project Screenshots
 
-### 🖥️ Power BI Dashboard — Business Overview
+### 🖥️ Power BI — Business Overview
 ![Business Overview](dashboard_overview.png)
 
-### 📊 Power BI Dashboard — Revenue Analysis
+### 📊 Power BI — Revenue Analysis
 ![Revenue Analysis](revenue_analysis.png)
 
-### 🔴 Power BI Dashboard — Churn Analysis
-![Churn Analysis](churn_analysis.png)
+### 🔴 Power BI — Churn Analysis
+![Churn Analysis](Churn_Analysis.png)
 
-### 🗺️ Power BI Dashboard — Product & Region
-![Product Region](product_region_analysis.png)
-
-### 🌐 Streamlit Web App
-![Streamlit App](streamlit_app.png)
-
+### 🗺️ Power BI — Product & Region
+![Product Region](Product_Region_Analysis.png)
 ## 🔗 Live Demo
 👉 **[Click here to view Live App](https://nagendra-churn-predictor.streamlit.app)**
 
