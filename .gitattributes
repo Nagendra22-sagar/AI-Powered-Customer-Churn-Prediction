@@ -1,2 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+.streamlit/secrets.toml
+Key.txt
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

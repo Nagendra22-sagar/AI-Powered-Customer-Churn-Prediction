@@ -34,8 +34,7 @@ st.markdown("""
 # ─────────────────────────────────────────
 # GROQ CLIENT
 # ─────────────────────────────────────────
-client = Groq(api_key="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")
-
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 # ─────────────────────────────────────────
 # LOAD MODEL & DATA
 # ─────────────────────────────────────────
