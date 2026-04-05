@@ -40,15 +40,17 @@ client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 # ─────────────────────────────────────────
 @st.cache_resource
 def load_model():
-    with open('models/churn_model.pkl', 'rb') as f:
-        model = pickle.load(f)
-    with open('models/scaler.pkl', 'rb') as f:
-        scaler = pickle.load(f)
+    with open(os.path.join(BASE_DIR, 'models', 'churn_model.pkl'), 'rb') as f:
+    model = pickle.load(f)
+with open(os.path.join(BASE_DIR, 'models', 'scaler.pkl'), 'rb') as f:
+    scaler = pickle.load(f)
     return model, scaler
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv('data/customer_features.csv')
+    import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+df = pd.read_csv(os.path.join(BASE_DIR, 'Data', 'customer_features.csv'))
     return df
 
 model, scaler = load_model()
