@@ -19,10 +19,10 @@ An end-to-end AI-powered customer churn prediction system that combines Machine 
 ###  Power BI — Product & Region
 ![Product Region](Dashboard%20Screenshot/Product_Region_Analysis.png)
 
-## 🔗 Live Demo
+##  Live Demo
  **[Click here to view Live App](https://nagendra-churn-predictor.streamlit.app)**
 
-## 🛠️ Tech Stack
+##  Tech Stack
 | Tool | Purpose |
 |------|---------|
 | Python | Data Analysis & ML |
