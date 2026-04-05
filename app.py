@@ -2,22 +2,19 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 from groq import Groq
 
-# ─────────────────────────────────────────
 # PAGE CONFIG
-# ─────────────────────────────────────────
 st.set_page_config(
     page_title="AI Churn Predictor",
     page_icon="🤖",
     layout="wide"
 )
 
-# ─────────────────────────────────────────
 # CUSTOM CSS
-# ─────────────────────────────────────────
 st.markdown("""
 <style>
     .main { background-color: #0E1117; }
@@ -31,34 +28,30 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────
 # GROQ CLIENT
-# ─────────────────────────────────────────
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-# ─────────────────────────────────────────
+
+# BASE DIRECTORY
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # LOAD MODEL & DATA
-# ─────────────────────────────────────────
 @st.cache_resource
 def load_model():
     with open(os.path.join(BASE_DIR, 'models', 'churn_model.pkl'), 'rb') as f:
-    model = pickle.load(f)
-with open(os.path.join(BASE_DIR, 'models', 'scaler.pkl'), 'rb') as f:
-    scaler = pickle.load(f)
+        model = pickle.load(f)
+    with open(os.path.join(BASE_DIR, 'models', 'scaler.pkl'), 'rb') as f:
+        scaler = pickle.load(f)
     return model, scaler
 
 @st.cache_data
 def load_data():
-    import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-df = pd.read_csv(os.path.join(BASE_DIR, 'Data', 'customer_features.csv'))
+    df = pd.read_csv(os.path.join(BASE_DIR, 'Data', 'customer_features.csv'))
     return df
 
 model, scaler = load_model()
 df = load_data()
 
-# ─────────────────────────────────────────
 # HEADER
-# ─────────────────────────────────────────
 st.markdown("""
     <h1 style='text-align: center; color: #00B4D8;'>
     🤖 AI-Powered Customer Churn Prediction
@@ -70,24 +63,18 @@ st.markdown("""
 
 st.markdown("---")
 
-# ─────────────────────────────────────────
 # SIDEBAR
-# ─────────────────────────────────────────
 st.sidebar.title("🎛️ Navigation")
 page = st.sidebar.radio(
     "Go to:",
     ["📊 Dashboard", "🔍 Churn Predictor", "🤖 AI Assistant", "📈 Analytics"]
 )
 
-# ─────────────────────────────────────────
 # PAGE 1 — DASHBOARD
-# ─────────────────────────────────────────
 if page == "📊 Dashboard":
     st.header("📊 Business Overview Dashboard")
     
-    # KPI Cards
     col1, col2, col3, col4 = st.columns(4)
-    
     with col1:
         st.metric("Total Customers", df.shape[0])
     with col2:
@@ -99,9 +86,7 @@ if page == "📊 Dashboard":
     
     st.markdown("---")
     
-    # Charts
     col1, col2 = st.columns(2)
-    
     with col1:
         st.subheader("Churn Distribution")
         fig, ax = plt.subplots(figsize=(6, 4))
@@ -126,20 +111,17 @@ if page == "📊 Dashboard":
         st.pyplot(fig)
     
     col1, col2 = st.columns(2)
-    
     with col1:
         st.subheader("Recency vs Churn")
         fig, ax = plt.subplots(figsize=(6, 4))
-        df.boxplot(
-            column='Recency',
-            by='Churned',
-            ax=ax,
-            patch_artist=True,
-            boxprops=dict(facecolor='#00B4D8', alpha=0.6),
-            medianprops=dict(color='red', linewidth=2)
-        )
+        churned_0 = df[df['Churned']==0]['Recency']
+        churned_1 = df[df['Churned']==1]['Recency']
+        ax.boxplot([churned_0, churned_1],
+                   labels=['Not Churned', 'Churned'],
+                   patch_artist=True,
+                   boxprops=dict(facecolor='#00B4D8', alpha=0.6),
+                   medianprops=dict(color='red', linewidth=2))
         ax.set_title('Recency vs Churn')
-        plt.suptitle('')
         st.pyplot(fig)
     
     with col2:
@@ -149,15 +131,12 @@ if page == "📊 Dashboard":
         ax.set_title('Customer Revenue Distribution')
         st.pyplot(fig)
 
-# ─────────────────────────────────────────
 # PAGE 2 — CHURN PREDICTOR
-# ─────────────────────────────────────────
 elif page == "🔍 Churn Predictor":
     st.header("🔍 Customer Churn Predictor")
     st.write("Enter customer details to predict churn risk!")
     
     col1, col2 = st.columns(2)
-    
     with col1:
         recency = st.slider("Days Since Last Purchase", 0, 365, 90)
         frequency = st.slider("Total Orders", 1, 20, 5)
@@ -170,7 +149,6 @@ elif page == "🔍 Churn Predictor":
         region = st.selectbox("Region", ['North', 'South', 'East', 'West'])
     
     if st.button("🔮 Predict Churn Risk", use_container_width=True):
-        # Encode inputs
         cat_map = {'Accessories': 0, 'Electronics': 1, 'Office': 2}
         reg_map = {'East': 0, 'North': 1, 'South': 2, 'West': 3}
         
@@ -191,20 +169,18 @@ elif page == "🔍 Churn Predictor":
         else:
             st.success(f"✅ LOW CHURN RISK — {round(probability*100, 1)}% probability")
         
-        # AI Explanation
         st.subheader("🤖 AI Explanation")
         with st.spinner("Getting AI analysis..."):
             prompt = f"""
             Analyze this customer and explain churn risk:
             - Recency: {recency} days
-            - Frequency: {frequency} orders  
+            - Frequency: {frequency} orders
             - Revenue: ${monetary}
             - Avg Order: ${avg_order}
             - Category: {category}
             - Region: {region}
             - Prediction: {'High Risk' if prediction == 1 else 'Low Risk'}
             - Probability: {round(probability*100, 1)}%
-            
             Give 3-4 lines business explanation and recommendations.
             """
             response = client.chat.completions.create(
@@ -213,17 +189,13 @@ elif page == "🔍 Churn Predictor":
             )
             st.info(response.choices[0].message.content)
 
-# ─────────────────────────────────────────
 # PAGE 3 — AI ASSISTANT
-# ─────────────────────────────────────────
 elif page == "🤖 AI Assistant":
     st.header("🤖 AI Data Assistant")
     st.write("Ask any business question about your customer data!")
     
-    # Predefined questions
     st.subheader("Quick Questions:")
     col1, col2, col3 = st.columns(3)
-    
     with col1:
         if st.button("What is the churn rate?"):
             st.session_state.question = "What is the overall churn rate and is it concerning?"
@@ -234,7 +206,6 @@ elif page == "🤖 AI Assistant":
         if st.button("Recommendations?"):
             st.session_state.question = "What strategy would you recommend to improve retention?"
     
-    # Custom question
     question = st.text_input(
         "Or ask your own question:",
         value=st.session_state.get('question', ''),
@@ -252,23 +223,19 @@ elif page == "🤖 AI Assistant":
                 Top Category: {df['Fav_Category'].mode()[0]}
                 Top Region: {df['Region'].mode()[0]}
                 """
-                
                 prompt = f"""
                 You are a data analyst. Answer based on this data:
                 {summary}
                 Question: {question}
                 Give clear business answer in 3-4 lines.
                 """
-                
                 response = client.chat.completions.create(
                     model="llama-3.3-70b-versatile",
                     messages=[{"role": "user", "content": prompt}]
                 )
-                
                 st.success("**AI Answer:**")
                 st.write(response.choices[0].message.content)
     
-    # Generate Full Report
     st.markdown("---")
     st.subheader("📄 Generate AI Business Report")
     
@@ -282,23 +249,14 @@ elif page == "🤖 AI Assistant":
             - Avg Revenue: ${round(df['Monetary'].mean(),2)}
             - Top Category: {df['Fav_Category'].mode()[0]}
             - Top Region: {df['Region'].mode()[0]}
-            
-            Include:
-            1. Executive Summary
-            2. Key Findings
-            3. Risk Assessment
-            4. Recommendations
+            Include: 1. Executive Summary 2. Key Findings 3. Risk Assessment 4. Recommendations
             """
-            
             response = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=[{"role": "user", "content": prompt}]
             )
-            
             report = response.choices[0].message.content
             st.write(report)
-            
-            # Download button
             st.download_button(
                 label="📥 Download Report",
                 data=report,
@@ -306,13 +264,10 @@ elif page == "🤖 AI Assistant":
                 mime="text/plain"
             )
 
-# ─────────────────────────────────────────
 # PAGE 4 — ANALYTICS
-# ─────────────────────────────────────────
 elif page == "📈 Analytics":
     st.header("📈 Customer Analytics")
     
-    # Filters
     col1, col2 = st.columns(2)
     with col1:
         selected_region = st.multiselect(
@@ -327,7 +282,6 @@ elif page == "📈 Analytics":
             default=df['Fav_Category'].unique()
         )
     
-    # Filter data
     filtered_df = df[
         (df['Region'].isin(selected_region)) &
         (df['Fav_Category'].isin(selected_category))
@@ -335,7 +289,6 @@ elif page == "📈 Analytics":
     
     st.markdown("---")
     
-    # Metrics
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Filtered Customers", filtered_df.shape[0])
@@ -346,9 +299,7 @@ elif page == "📈 Analytics":
     
     st.markdown("---")
     
-    # Charts
     col1, col2 = st.columns(2)
-    
     with col1:
         st.subheader("Churn by Region")
         fig, ax = plt.subplots(figsize=(6, 4))
@@ -367,14 +318,12 @@ elif page == "📈 Analytics":
         plt.xticks(rotation=0)
         st.pyplot(fig)
     
-    # Customer Table
     st.subheader("📋 Customer Data Table")
     st.dataframe(
         filtered_df.sort_values('Monetary', ascending=False),
         use_container_width=True
     )
     
-    # Download filtered data
     st.download_button(
         label="📥 Download Filtered Data",
         data=filtered_df.to_csv(index=False),
