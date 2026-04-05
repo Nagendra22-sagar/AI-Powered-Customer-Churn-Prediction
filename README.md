@@ -8,16 +8,16 @@ An end-to-end AI-powered customer churn prediction system that combines Machine 
 ## 📸 Project Screenshots
 
 ### 🖥️ Power BI — Business Overview
-![Business Overview](dashboard_overview.png)
+![Business Overview](Dashboard%20Screenshot/dashboard_overview.png)
 
 ### 📊 Power BI — Revenue Analysis
-![Revenue Analysis](revenue_analysis.png)
+![Revenue Analysis](Dashboard%20Screenshot/revenue_analysis.png)
 
 ### 🔴 Power BI — Churn Analysis
-![Churn Analysis](Churn_Analysis.png)
+![Churn Analysis](Dashboard%20Screenshot/Churn_Analysis.png)
 
 ### 🗺️ Power BI — Product & Region
-![Product Region](Product_Region_Analysis.png)
+![Product Region](Dashboard%20Screenshot/Product_Region_Analysis.png)
 
 ## 🔗 Live Demo
 👉 **[Click here to view Live App](https://nagendra-churn-predictor.streamlit.app)**
