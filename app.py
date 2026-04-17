@@ -136,7 +136,6 @@ if page == "📊 Dashboard":
     textprops={'color': 'white'},   
     ax=ax
 )
-        )
         ax.set_ylabel('')
         st.pyplot(fig)
         plt.close()
