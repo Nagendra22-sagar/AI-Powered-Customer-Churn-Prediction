@@ -403,4 +403,3 @@ elif page == "📈 Analytics":
         file_name="filtered_customers.csv",
         mime="text/csv"
     )
-you can change fully and give me full code 
