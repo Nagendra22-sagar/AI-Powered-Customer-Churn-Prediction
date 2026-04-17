@@ -54,7 +54,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # GROQ CLIENT
-client = Groq(api_key=st.secrets["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"])
+client = Groq(api_key="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")
+
 
 # BASE DIRECTORY
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
