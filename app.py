@@ -17,179 +17,371 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# ADAPTIVE CSS — works in BOTH light & dark mode
-# Uses currentColor and CSS variables throughout
+# PREMIUM CSS — Beautiful in both light & dark
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 
-    /* ── Global font ── */
+    /* ── Global ── */
     html, body, [class*="css"] {
-        font-family: 'IBM Plex Sans', sans-serif;
+        font-family: 'Outfit', sans-serif !important;
     }
 
-    /* ── Adaptive accent colours ── */
+    /* ── CSS Variables ── */
     :root {
-        --accent:        #0F62FE;
-        --accent-light:  #D0E2FF;
-        --accent-dark:   #002D9C;
-        --success:       #198038;
-        --success-bg:    #DEFBE6;
-        --danger:        #DA1E28;
-        --danger-bg:     #FFF1F1;
-        --warn:          #F1C21B;
-        --card-border:   rgba(15, 98, 254, 0.25);
-        --radius:        10px;
+        --indigo:       #6366F1;
+        --indigo-dark:  #4338CA;
+        --indigo-glow:  rgba(99,102,241,0.18);
+        --teal:         #14B8A6;
+        --rose:         #F43F5E;
+        --amber:        #F59E0B;
+        --emerald:      #10B981;
+        --card-border:  rgba(99,102,241,0.2);
+        --radius:       14px;
+        --radius-sm:    8px;
+        --shadow:       0 4px 24px rgba(99,102,241,0.13);
+        --shadow-hover: 0 8px 32px rgba(99,102,241,0.25);
     }
 
-    /* ── Page padding ── */
+    /* ── Page ── */
     .main .block-container {
-        padding-top: 1.2rem;
-        padding-bottom: 2rem;
-        max-width: 1200px;
+        padding-top: 0.5rem;
+        padding-bottom: 2.5rem;
+        max-width: 1220px;
     }
 
-    /* ── HEADER BANNER ── */
+    /* ══════════════════════════════════════
+       HEADER — gradient glass card
+    ══════════════════════════════════════ */
     .app-header {
-        border-left: 5px solid var(--accent);
-        padding: 14px 20px;
-        margin-bottom: 24px;
-        border-radius: 0 var(--radius) var(--radius) 0;
+        position: relative;
+        padding: 28px 32px;
+        margin-bottom: 28px;
+        border-radius: var(--radius);
         background: linear-gradient(135deg,
-            rgba(15,98,254,0.10) 0%,
-            rgba(15,98,254,0.03) 100%);
+            rgba(99,102,241,0.12) 0%,
+            rgba(20,184,166,0.08) 50%,
+            rgba(99,102,241,0.05) 100%);
+        border: 1px solid var(--card-border);
+        overflow: hidden;
+    }
+    .app-header::before {
+        content: '';
+        position: absolute;
+        top: -60px; right: -60px;
+        width: 220px; height: 220px;
+        background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .app-header::after {
+        content: '';
+        position: absolute;
+        bottom: -40px; left: 40px;
+        width: 140px; height: 140px;
+        background: radial-gradient(circle, rgba(20,184,166,0.13) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .app-header-badge {
+        display: inline-block;
+        background: linear-gradient(90deg, var(--indigo), var(--teal));
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        padding: 3px 12px;
+        border-radius: 99px;
+        margin-bottom: 10px;
     }
     .app-header h1 {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 1.7rem;
-        font-weight: 600;
-        margin: 0 0 4px 0;
-        color: var(--accent);
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 2rem !important;
+        font-weight: 800 !important;
+        margin: 0 0 6px 0 !important;
+        background: linear-gradient(135deg, var(--indigo) 0%, var(--teal) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         letter-spacing: -0.5px;
+        line-height: 1.2;
     }
     .app-header p {
         margin: 0;
-        font-size: 0.85rem;
-        opacity: 0.65;
+        font-size: 0.88rem;
+        font-weight: 400;
+        opacity: 0.6;
     }
 
-    /* ── SECTION LABEL ── */
+    /* ══════════════════════════════════════
+       SECTION LABEL
+    ══════════════════════════════════════ */
     .section-label {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.72rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
         font-weight: 600;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 4px;
+        background: linear-gradient(90deg, var(--indigo), var(--teal));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 2px;
     }
 
-    /* ── METRIC CARDS ── */
+    /* ══════════════════════════════════════
+       METRIC CARDS
+    ══════════════════════════════════════ */
     [data-testid="metric-container"] {
-        border: 1px solid var(--card-border);
-        border-top: 3px solid var(--accent);
-        border-radius: var(--radius);
-        padding: 14px 16px;
-        transition: box-shadow .2s;
+        background: linear-gradient(135deg,
+            rgba(99,102,241,0.07) 0%,
+            rgba(99,102,241,0.02) 100%) !important;
+        border: 1px solid var(--card-border) !important;
+        border-radius: var(--radius) !important;
+        padding: 18px 20px !important;
+        transition: all 0.25s ease !important;
+        box-shadow: var(--shadow) !important;
     }
     [data-testid="metric-container"]:hover {
-        box-shadow: 0 4px 20px rgba(15,98,254,0.15);
+        transform: translateY(-3px) !important;
+        box-shadow: var(--shadow-hover) !important;
+        border-color: var(--indigo) !important;
+    }
+    [data-testid="metric-container"] [data-testid="stMetricValue"] {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+        background: linear-gradient(135deg, var(--indigo), var(--teal));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    [data-testid="metric-container"] [data-testid="stMetricLabel"] {
+        font-size: 0.78rem !important;
+        font-weight: 500 !important;
+        letter-spacing: 0.5px;
+        opacity: 0.65;
+        text-transform: uppercase;
     }
 
-    /* ── BUTTONS ── */
+    /* ══════════════════════════════════════
+       BUTTONS
+    ══════════════════════════════════════ */
     .stButton > button {
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-weight: 600;
-        border-radius: var(--radius) !important;
-        transition: all .2s !important;
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        border-radius: var(--radius-sm) !important;
+        letter-spacing: 0.3px !important;
+        transition: all 0.2s ease !important;
     }
     .stButton > button[kind="primary"] {
-        background: var(--accent) !important;
-        border-color: var(--accent) !important;
+        background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-dark) 100%) !important;
+        border: none !important;
         color: #fff !important;
+        box-shadow: 0 4px 15px rgba(99,102,241,0.4) !important;
+        padding: 0.55rem 1.4rem !important;
     }
     .stButton > button[kind="primary"]:hover {
-        background: var(--accent-dark) !important;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(15,98,254,0.35) !important;
+        background: linear-gradient(135deg, #7C7FF5 0%, var(--indigo) 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(99,102,241,0.5) !important;
+    }
+    .stButton > button[kind="primary"]:active {
+        transform: translateY(0px) !important;
+    }
+    .stButton > button:not([kind="primary"]) {
+        border-radius: var(--radius-sm) !important;
+        border: 1px solid var(--card-border) !important;
+        background: rgba(99,102,241,0.05) !important;
     }
     .stButton > button:not([kind="primary"]):hover {
-        border-color: var(--accent) !important;
-        color: var(--accent) !important;
-        transform: translateY(-1px);
+        border-color: var(--indigo) !important;
+        background: rgba(99,102,241,0.1) !important;
+        color: var(--indigo) !important;
+        transform: translateY(-1px) !important;
     }
 
-    /* ── PROGRESS BAR ── */
+    /* ══════════════════════════════════════
+       PROGRESS BAR
+    ══════════════════════════════════════ */
     .stProgress > div > div > div > div {
-        background: linear-gradient(90deg, var(--accent) 0%, #BE95FF 100%) !important;
+        background: linear-gradient(90deg, var(--indigo) 0%, var(--teal) 100%) !important;
         border-radius: 99px !important;
     }
     .stProgress > div > div {
         border-radius: 99px !important;
         height: 10px !important;
+        background: rgba(99,102,241,0.1) !important;
     }
 
-    /* ── INPUTS ── */
-    .stSlider [data-baseweb="slider"] [data-testid="stThumbValue"] {
-        background: var(--accent) !important;
-    }
-    .stTextInput > div > div > input,
-    .stSelectbox > div > div {
-        border-radius: var(--radius) !important;
-        border-color: var(--card-border) !important;
+    /* ══════════════════════════════════════
+       INPUTS & SELECTS
+    ══════════════════════════════════════ */
+    .stTextInput > div > div > input {
+        border-radius: var(--radius-sm) !important;
+        border: 1px solid var(--card-border) !important;
+        font-family: 'Outfit', sans-serif !important;
+        transition: all 0.2s !important;
     }
     .stTextInput > div > div > input:focus {
-        border-color: var(--accent) !important;
-        box-shadow: 0 0 0 2px rgba(15,98,254,0.2) !important;
+        border-color: var(--indigo) !important;
+        box-shadow: 0 0 0 3px rgba(99,102,241,0.15) !important;
+    }
+    .stSelectbox > div > div {
+        border-radius: var(--radius-sm) !important;
+        border: 1px solid var(--card-border) !important;
+    }
+    .stSlider [data-baseweb="slider"] {
+        padding: 6px 0 !important;
     }
 
-    /* ── ALERT BOXES ── */
-    .stSuccess, .stInfo {
-        border-radius: var(--radius) !important;
-        border-left: 4px solid var(--accent) !important;
+    /* ══════════════════════════════════════
+       ALERT / INFO BOXES
+    ══════════════════════════════════════ */
+    .stSuccess {
+        border-radius: var(--radius-sm) !important;
+        border-left: 4px solid var(--emerald) !important;
+        background: rgba(16,185,129,0.08) !important;
+    }
+    .stInfo {
+        border-radius: var(--radius-sm) !important;
+        border-left: 4px solid var(--indigo) !important;
+        background: rgba(99,102,241,0.07) !important;
     }
     .stError {
-        border-radius: var(--radius) !important;
-        border-left: 4px solid var(--danger) !important;
+        border-radius: var(--radius-sm) !important;
+        border-left: 4px solid var(--rose) !important;
+        background: rgba(244,63,94,0.07) !important;
+    }
+    .stWarning {
+        border-radius: var(--radius-sm) !important;
+        border-left: 4px solid var(--amber) !important;
+        background: rgba(245,158,11,0.07) !important;
     }
 
-    /* ── DATAFRAME ── */
+    /* ══════════════════════════════════════
+       DATAFRAME
+    ══════════════════════════════════════ */
     [data-testid="stDataFrame"] {
-        border: 1px solid var(--card-border);
-        border-radius: var(--radius);
-        overflow: hidden;
+        border: 1px solid var(--card-border) !important;
+        border-radius: var(--radius) !important;
+        overflow: hidden !important;
+        box-shadow: var(--shadow) !important;
     }
 
-    /* ── SIDEBAR ── */
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
     [data-testid="stSidebar"] {
-        border-right: 1px solid var(--card-border);
+        border-right: 1px solid var(--card-border) !important;
+        background: linear-gradient(180deg,
+            rgba(99,102,241,0.04) 0%,
+            rgba(99,102,241,0.01) 100%) !important;
     }
-    [data-testid="stSidebar"] .stRadio > label {
-        font-weight: 600;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--accent) !important;
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] .stMarkdown h3 {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        background: linear-gradient(90deg, var(--indigo), var(--teal));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    [data-testid="stSidebar"] .stRadio > div > label {
+        border-radius: var(--radius-sm) !important;
+        padding: 6px 10px !important;
+        transition: all 0.15s !important;
+    }
+    [data-testid="stSidebar"] .stRadio > div > label:hover {
+        background: rgba(99,102,241,0.08) !important;
+    }
+    [data-testid="stSidebar"] .stInfo {
+        border-radius: var(--radius-sm) !important;
+        font-size: 0.82rem !important;
     }
 
-    /* ── DIVIDER ── */
+    /* ══════════════════════════════════════
+       DIVIDERS
+    ══════════════════════════════════════ */
     hr {
-        border-color: var(--card-border) !important;
-        margin: 20px 0 !important;
+        border: none !important;
+        height: 1px !important;
+        background: linear-gradient(90deg,
+            transparent,
+            rgba(99,102,241,0.3),
+            rgba(20,184,166,0.3),
+            transparent) !important;
+        margin: 24px 0 !important;
     }
 
-    /* ── SPINNER ── */
-    .stSpinner > div > div {
-        border-top-color: var(--accent) !important;
+    /* ══════════════════════════════════════
+       HEADINGS
+    ══════════════════════════════════════ */
+    h2 {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 1.4rem !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.3px !important;
     }
-
-    /* ── SUBHEADERS ── */
-    h2, h3 {
-        font-family: 'IBM Plex Mono', monospace !important;
+    h3 {
+        font-family: 'Outfit', sans-serif !important;
         font-size: 1.05rem !important;
         font-weight: 600 !important;
-        letter-spacing: -0.3px;
+        letter-spacing: -0.2px !important;
+    }
+
+    /* ══════════════════════════════════════
+       DOWNLOAD BUTTON
+    ══════════════════════════════════════ */
+    [data-testid="stDownloadButton"] > button {
+        font-family: 'Outfit', sans-serif !important;
+        font-weight: 600 !important;
+        border-radius: var(--radius-sm) !important;
+        border: 1px solid var(--card-border) !important;
+        background: rgba(99,102,241,0.06) !important;
+        transition: all 0.2s !important;
+    }
+    [data-testid="stDownloadButton"] > button:hover {
+        border-color: var(--indigo) !important;
+        background: rgba(99,102,241,0.12) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(99,102,241,0.2) !important;
+    }
+
+    /* ══════════════════════════════════════
+       MULTISELECT TAGS
+    ══════════════════════════════════════ */
+    [data-baseweb="tag"] {
+        background: linear-gradient(135deg, var(--indigo), var(--indigo-dark)) !important;
+        border-radius: 99px !important;
+        color: #fff !important;
+    }
+
+    /* ══════════════════════════════════════
+       SPINNER
+    ══════════════════════════════════════ */
+    .stSpinner > div > div {
+        border-top-color: var(--indigo) !important;
+    }
+
+    /* ══════════════════════════════════════
+       CAPTION / SMALL TEXT
+    ══════════════════════════════════════ */
+    .stCaption, [data-testid="stCaptionContainer"] {
+        font-size: 0.8rem !important;
+        opacity: 0.6 !important;
+        font-style: italic;
+    }
+
+    /* ══════════════════════════════════════
+       RADIO SELECTED STATE
+    ══════════════════════════════════════ */
+    [data-testid="stSidebar"] [data-baseweb="radio"] svg {
+        fill: var(--indigo) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -204,13 +396,14 @@ def apply_chart_style():
     fig, ax = plt.subplots(figsize=(6, 4))
     fig.patch.set_alpha(0.0)
     ax.set_facecolor("none")
-    # Use a neutral foreground that works on both light & dark
     for spine in ax.spines.values():
-        spine.set_edgecolor("#888888")
-    ax.tick_params(colors="#888888")
-    ax.xaxis.label.set_color("#888888")
-    ax.yaxis.label.set_color("#888888")
-    ax.title.set_color("#0F62FE")
+        spine.set_edgecolor("rgba(99,102,241,0.2)")
+    ax.tick_params(colors="#9CA3AF")
+    ax.xaxis.label.set_color("#9CA3AF")
+    ax.yaxis.label.set_color("#9CA3AF")
+    ax.title.set_color("#6366F1")
+    ax.title.set_fontsize(11)
+    ax.title.set_fontweight('bold')
     return fig, ax
 
 
@@ -224,7 +417,8 @@ try:
 except Exception:
     client = None
 
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "llama3-70b-8192"   # stable, widely available model
+
 
 def ask_groq(prompt: str) -> str:
     """Call Groq and return text, or a graceful error string."""
@@ -267,8 +461,9 @@ df = load_data()
 # ─────────────────────────────────────────────
 st.markdown("""
 <div class='app-header'>
+    <div class='app-header-badge'>✦ Retention Intelligence System</div>
     <h1>🤖 AI Churn Predictor</h1>
-    <p>Retention Intelligence System — powered by Machine Learning & Groq AI</p>
+    <p>Predict customer churn with Machine Learning &amp; explain results with Groq AI in real-time</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -289,7 +484,7 @@ with st.sidebar:
     st.info("Built with Python, Scikit-learn, Groq AI & Streamlit")
 
     churn_rate = round(df['Churned'].mean() * 100, 2)
-    color = "#DA1E28" if churn_rate > 25 else "#198038"
+    color = "#F43F5E" if churn_rate > 25 else "#10B981"
     st.markdown(f"**Total Customers:** `{df.shape[0]}`")
     st.markdown(
         f"**Churn Rate:** <span style='color:{color};font-weight:700'>{churn_rate}%</span>",
@@ -329,8 +524,8 @@ if page == "📊 Dashboard":
             counts,
             labels=['Retained', 'Churned'],
             autopct='%1.1f%%',
-            colors=['#0F62FE', '#DA1E28'],
-            textprops={'color': '#888888', 'fontsize': 11},
+            colors=['#6366F1', '#F43F5E'],
+            textprops={'color': '#9CA3AF', 'fontsize': 11},
             wedgeprops=wedge_props,
             startangle=90,
             pctdistance=0.75
@@ -343,11 +538,11 @@ if page == "📊 Dashboard":
         st.subheader("Churn Rate by Category")
         fig, ax = apply_chart_style()
         churn_cat = df.groupby('Fav_Category')['Churned'].mean() * 100
-        bars = churn_cat.plot(kind='bar', ax=ax, color='#0F62FE',
+        bars = churn_cat.plot(kind='bar', ax=ax, color='#6366F1',
                                edgecolor='none', width=0.55)
         ax.set_xlabel('')
-        ax.set_ylabel('Churn Rate (%)', color='#888888')
-        ax.set_title('Churn Rate by Category (%)', color='#0F62FE')
+        ax.set_ylabel('Churn Rate (%)', color='#9CA3AF')
+        ax.set_title('Churn Rate by Category (%)', color='#6366F1')
         plt.xticks(rotation=0)
         # label each bar
         for bar in ax.patches:
@@ -355,7 +550,7 @@ if page == "📊 Dashboard":
                 bar.get_x() + bar.get_width() / 2,
                 bar.get_height() + 0.4,
                 f'{bar.get_height():.1f}%',
-                ha='center', va='bottom', color='#888888', fontsize=9
+                ha='center', va='bottom', color='#9CA3AF', fontsize=9
             )
         st.pyplot(fig)
         plt.close()
@@ -370,25 +565,25 @@ if page == "📊 Dashboard":
             [data_not, data_yes],
             labels=['Not Churned', 'Churned'],
             patch_artist=True,
-            boxprops=dict(facecolor='#0F62FE', alpha=0.45, linewidth=0),
-            medianprops=dict(color='#DA1E28', linewidth=2.5),
-            whiskerprops=dict(color='#888888'),
-            capprops=dict(color='#888888'),
-            flierprops=dict(markerfacecolor='#0F62FE', alpha=0.4, markersize=4)
+            boxprops=dict(facecolor='#6366F1', alpha=0.45, linewidth=0),
+            medianprops=dict(color='#F43F5E', linewidth=2.5),
+            whiskerprops=dict(color='#9CA3AF'),
+            capprops=dict(color='#9CA3AF'),
+            flierprops=dict(markerfacecolor='#6366F1', alpha=0.4, markersize=4)
         )
-        ax.set_title('Recency Distribution by Churn', color='#0F62FE')
-        ax.set_ylabel('Days Since Last Purchase', color='#888888')
+        ax.set_title('Recency Distribution by Churn', color='#6366F1')
+        ax.set_ylabel('Days Since Last Purchase', color='#9CA3AF')
         st.pyplot(fig)
         plt.close()
 
     with col2:
         st.subheader("Revenue Distribution")
         fig, ax = apply_chart_style()
-        ax.hist(df['Monetary'], bins=30, color='#0F62FE', alpha=0.8,
+        ax.hist(df['Monetary'], bins=30, color='#6366F1', alpha=0.8,
                 edgecolor='none', linewidth=0)
-        ax.set_title('Customer Revenue Distribution', color='#0F62FE')
-        ax.set_xlabel('Revenue ($)', color='#888888')
-        ax.set_ylabel('Count', color='#888888')
+        ax.set_title('Customer Revenue Distribution', color='#6366F1')
+        ax.set_xlabel('Revenue ($)', color='#9CA3AF')
+        ax.set_ylabel('Count', color='#9CA3AF')
         st.pyplot(fig)
         plt.close()
 
@@ -447,12 +642,12 @@ elif page == "🔍 Churn Predictor":
             fig.patch.set_alpha(0.0)
             ax.set_facecolor("none")
             ax.barh(0, 100, color='#E0E0E0', height=0.4)
-            bar_color = '#DA1E28' if prediction == 1 else '#198038'
+            bar_color = '#F43F5E' if prediction == 1 else '#10B981'
             ax.barh(0, pct, color=bar_color, height=0.4)
             ax.set_xlim(0, 100)
             ax.set_yticks([])
             ax.set_xticks([0, 25, 50, 75, 100])
-            ax.tick_params(colors='#888888', labelsize=8)
+            ax.tick_params(colors='#9CA3AF', labelsize=8)
             for spine in ax.spines.values():
                 spine.set_visible(False)
             ax.set_title(f"Score: {pct}%", color=bar_color, fontsize=11, fontweight='bold', pad=6)
@@ -639,19 +834,19 @@ elif page == "📈 Analytics":
         st.subheader("Churn Rate by Region")
         fig, ax = apply_chart_style()
         churn_region = filtered_df.groupby('Region')['Churned'].mean() * 100
-        colors_region = ['#DA1E28' if v == churn_region.max() else '#0F62FE'
+        colors_region = ['#F43F5E' if v == churn_region.max() else '#6366F1'
                          for v in churn_region]
         churn_region.plot(kind='bar', ax=ax, color=colors_region,
                           edgecolor='none', width=0.55)
-        ax.set_ylabel('Churn Rate (%)', color='#888888')
-        ax.set_title('Churn Rate by Region (%)', color='#0F62FE')
+        ax.set_ylabel('Churn Rate (%)', color='#9CA3AF')
+        ax.set_title('Churn Rate by Region (%)', color='#6366F1')
         plt.xticks(rotation=0)
         for bar in ax.patches:
             ax.text(
                 bar.get_x() + bar.get_width() / 2,
                 bar.get_height() + 0.3,
                 f'{bar.get_height():.1f}%',
-                ha='center', va='bottom', color='#888888', fontsize=9
+                ha='center', va='bottom', color='#9CA3AF', fontsize=9
             )
         st.pyplot(fig)
         plt.close()
@@ -660,19 +855,19 @@ elif page == "📈 Analytics":
         st.subheader("Avg Revenue by Region")
         fig, ax = apply_chart_style()
         rev_region = filtered_df.groupby('Region')['Monetary'].mean()
-        colors_rev = ['#198038' if v == rev_region.max() else '#0F62FE'
+        colors_rev = ['#10B981' if v == rev_region.max() else '#6366F1'
                       for v in rev_region]
         rev_region.plot(kind='bar', ax=ax, color=colors_rev,
                         edgecolor='none', width=0.55)
-        ax.set_ylabel('Avg Revenue ($)', color='#888888')
-        ax.set_title('Avg Revenue by Region', color='#0F62FE')
+        ax.set_ylabel('Avg Revenue ($)', color='#9CA3AF')
+        ax.set_title('Avg Revenue by Region', color='#6366F1')
         plt.xticks(rotation=0)
         for bar in ax.patches:
             ax.text(
                 bar.get_x() + bar.get_width() / 2,
                 bar.get_height() + 1,
                 f'${bar.get_height():,.0f}',
-                ha='center', va='bottom', color='#888888', fontsize=9
+                ha='center', va='bottom', color='#9CA3AF', fontsize=9
             )
         st.pyplot(fig)
         plt.close()
@@ -694,8 +889,8 @@ elif page == "📈 Analytics":
             annot_kws={"size": 9, "color": "white"},
             cbar_kws={"shrink": 0.8}
         )
-        ax.tick_params(colors='#888888', labelsize=9)
-        ax.set_title('Feature Correlations', color='#0F62FE', pad=10)
+        ax.tick_params(colors='#9CA3AF', labelsize=9)
+        ax.set_title('Feature Correlations', color='#6366F1', pad=10)
         st.pyplot(fig)
         plt.close()
 
