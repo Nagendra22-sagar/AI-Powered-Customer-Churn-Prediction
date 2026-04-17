@@ -63,6 +63,7 @@ st.markdown("""
 
 # GROQ CLIENT
 client = Groq(api_key="gsk_XXXX")
+
 # BASE DIRECTORY
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
