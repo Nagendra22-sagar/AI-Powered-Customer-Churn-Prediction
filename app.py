@@ -224,8 +224,7 @@ try:
 except Exception:
     client = None
 
-GROQ_MODEL = "llama3-70b-8192"   # stable, widely available model
-
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 def ask_groq(prompt: str) -> str:
     """Call Groq and return text, or a graceful error string."""
