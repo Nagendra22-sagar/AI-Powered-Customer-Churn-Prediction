@@ -53,6 +53,7 @@ An end-to-end AI-powered customer churn prediction system that combines Machine 
 -  Deployed on Streamlit Cloud
 
 ##  Project Structure
+```
 AI-Powered-Customer-Churn-Prediction/
 ├── Data/
 │   ├── customer_cohort_dataset.csv
@@ -74,7 +75,7 @@ AI-Powered-Customer-Churn-Prediction/
 ├── app.py
 ├── requirements.txt
 └── README.md
-
+```
 ##  Model Performance
 | Model | Accuracy | AUC Score |
 |-------|----------|-----------|
